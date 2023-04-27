@@ -168,8 +168,20 @@ def config_image(distro,infos):
     if os.path.islink(resolv_conf):
         os.unlink(resolv_conf)
     with open(resolv_conf,'w') as f:
-        f.write('nameserver 1.1.1.1\n')
-        f.write('nameserver 8.8.8.8\n')
+        f.write('nameserver 114.114.114.114\n')
+        f.write('nameserver 114.114.114.115\n')
+    group = distro_path + '/etc/group'
+    with os.popen('whoami') as p:
+        userid = p.read()
+        userid = userid[4:len(userid)-1]
+        gp1 = '20' + userid
+        gp2 = '50' + userid
+    with open(group,'a') as g:
+        g.write("""
+3003:x:3003:
+9997:x:9997:
+""" + gp1 + ':x:' + gp1 + """:
+""" + gp2 + ':x:' + gp2)
     config = load_local()
     config.update({distro : infos})
     with open(atilo_config,'w') as f:
