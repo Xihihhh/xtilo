@@ -38,7 +38,7 @@
         "amd64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/centos/8-Stream/amd64/default/",
         "check": "lxc",
         "zip": "xz"
-    }
+    },
     "centos9": {
         "version": "Stream",
         "lxc": true,
@@ -46,7 +46,7 @@
         "amd64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/centos/9-Stream/amd64/default/",
         "check": "lxc",
         "zip": "xz"
-    }
+    },
     "debian": {
         "version": "buster",
         "lxc": true,
