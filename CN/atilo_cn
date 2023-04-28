@@ -184,7 +184,7 @@ def config_image(distro,infos):
 3003:x:3003:
 9997:x:9997:
 """ + gp1 + ':x:' + gp1 + """:
-""" + gp2 + ':x:' + gp2)
+""" + gp2 + ':x:' + gp2 + ':')
     config = load_local()
     config.update({distro : infos})
     with open(atilo_config,'w') as f:
