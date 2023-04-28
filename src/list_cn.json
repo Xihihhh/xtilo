@@ -2,6 +2,8 @@
     "linux": [
         "alpine",
         "centos",
+        "centos8",
+        "centos9",
         "debian",
         "fedora",
         "kali",
