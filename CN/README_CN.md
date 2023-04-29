@@ -30,15 +30,17 @@ help             帮助
 
 ## 支持的发行版
 
-| 发行版        | aarch64 |  arm  | x86_64 | i686  |
+| 发行版        | aarch64 |  arm  | x86_64 | i386  |
 | ------------- | :-----: | :---: | :----: | :---: |
 | Alpine        |    √    |   √   |   √    |   √   |
-| CentOS        |    √    |   √   |   √    |   √   |
+| CentOS7       |    √    |   √   |   √    |   √   |
+| CentOS8-Stream|    √    |   ×   |   √    |   ×   |
+| CentOS9-Stream|    √    |   ×   |   √    |   ×   |
 | Debian        |    √    |   √   |   √    |   √   |
-| Fedora        |    √    |   √   |   √    |   ×   |
-| Kali          |    √    |   √   |   √    |   √   |
-| openSUSE      |    √    |   ×   |   √    |   √   |
-| Ubuntu        |    √    |   √   |   √    |   √   |
+| Fedora        |    √    |   ×   |   √    |   ×   |
+| Kali          |    √    |   √   |   √    |   ×   |
+| openSUSE      |    √    |   ×   |   √    |   ×   |
+| Ubuntu        |    √    |   √   |   √    |   ×   |
 
 ## 图形
 
