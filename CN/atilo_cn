@@ -367,7 +367,6 @@ if __name__ == "__main__":
         if len(argv_len) < 3:
             print('你需要从镜像列表中指定可用镜像')
             exit(1)
-        elif 
         else:
             run_image(argv_len[2])
     elif argv_len[1] == 'clean':
