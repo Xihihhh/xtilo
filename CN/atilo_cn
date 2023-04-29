@@ -189,7 +189,7 @@ def config_image(distro,infos):
     config.update({distro : infos})
     with open(atilo_config,'w') as f:
         json.dump(config,indent=4,fp=f)
-#   script(distro)
+    script(distro)
     print('一切完成')
     print('使用 atilo run ' + distro + ' 来运行')
 
@@ -223,6 +223,7 @@ command+='""")
         s.write("command+=' --login'\n")
         s.write('$command')
         os.system('chmod +x ' + script)
+        print('')
 
 def extract_file(distro,zip_m):
     distro_path = atilo_home + distro
