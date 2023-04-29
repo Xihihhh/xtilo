@@ -368,41 +368,39 @@ def show_help():
 if __name__ == "__main__":
     check_dir()
     
-    argv = sys.argv
-    argv_len = argv
-    if argv_len > 3:
-        print('参数过多')
-        exit(1)
-    if argv_len == 1:
+    if len(sys.argv) == 1:
         show_help()
         print('请指定一个命令')
         exit(1)
-    if argv[1] == 'help':
+    if sys.argv[1] == 'help':
         show_help()
-    elif argv[1] == 'pull':
-        if argv_len < 3:
+    elif sys.argv[1] == 'pull':
+        if len(sys.argv) < 3:
             print('你需要从镜像列表中指定可用镜像')
             exit(1)
-        elif argv_len > 3:
+        elif len(sys.argv) >3:
             print('无用参数')
             exit(1)
         else:
-            pull_image(argv[2])
-    elif argv[1] == 'images':
+            pull_image(sys.argv[2])
+    elif sys.argv[1] == 'images':
         show_list()
-    elif argv[1] == 'remove':
-        if argv_len < 3:
+    elif sys.argv[1] == 'remove':
+        if len(sys.argv) < 3:
+            print('你需要从镜像列表中指定可用镜像')
+            exit(1)
+        elif len(sys.argv) >3:
+            print('')
+            exit(1)
+        else:
+            remove_image(sys.argv[2])
+    elif sys.argv[1] == 'run':
+        if len(sys.argv) < 3:
             print('你需要从镜像列表中指定可用镜像')
             exit(1)
         else:
-            remove_image(argv[2])
-    elif argv[1] == 'run':
-        if argv_len < 3:
-            print('你需要从镜像列表中指定可用镜像')
-            exit(1)
-        else:
-            run_image(argv[2])
-    elif argv[1] == 'clean':
+            run_image(sys.argv[2])
+    elif sys.argv[1] == 'clean':
         clean_tmps()
     else:
         print('未知命令')
