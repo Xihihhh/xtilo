@@ -337,7 +337,7 @@ if __name__ == "__main__":
     check_dir()
     
     argv = sys.argv
-    argv_len = len(sys.argv)
+    argv_len = argv
     if argv_len > 3:
         print('参数过多')
         exit(1)
@@ -365,7 +365,7 @@ if __name__ == "__main__":
         else:
             remove_image(argv[2])
     elif argv[1] == 'run':
-        if len(argv_len) < 3:
+        if argv_len < 3:
             print('你需要从镜像列表中指定可用镜像')
             exit(1)
         else:
