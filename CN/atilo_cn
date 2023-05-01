@@ -196,7 +196,7 @@ def config_image(distro,infos):
 def script(distro):
     distro_path = atilo_home + distro
     infos = load_local().get(distro)
-    script = atilo_home + distro + '-start.sh'
+    script = atilo_home + 'start-' + distro + 'sh'
     with open(script,'w') as s:
         s.write('#! /usr/bin/bash\n')
         s.write("""unset LD_PRELOAD
