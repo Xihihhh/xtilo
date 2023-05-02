@@ -203,7 +203,7 @@ def config_image(distro,infos):
 def script(distro):
     distro_path = atilo_home + distro
     infos = load_local().get(distro)
-    script = atilo_home + 'start-' + distro + 'sh'
+    script = atilo_home + 'start-' + distro + '.sh'
     with open(script,'w') as s:
         s.write('#! /usr/bin/bash\n')
         s.write("""unset LD_PRELOAD
@@ -211,9 +211,10 @@ command='proot'
 command+=' --link2symlink'
 command+=' -S'
 command+=' """ + distro_path + """'
+#command+=' -b /storage/emulated/0'
 #command+=' -b /sdcard'
+#command+=' -b /data/data/com.termux'
 #command+=' -b /system'
-#command+=' -b /data/data/com.termux/files/home'
 command+=' -w /root'
 command+=' /usr/bin/env -i'
 command+=' HOME=/root'
@@ -239,7 +240,7 @@ def extract_file(distro,zip_m):
         os.system('chmod -R 777 ' + distro_path)
         os.system('rm -rf ' + distro_path)
 
-    zip_f = tarfile.open(file_path,'r:'+zip_m)
+    zip_f = tarfile.open(file_path,'r:' + zip_m)
     if not os.path.isdir(distro_path):
         os.mkdir(distro_path)
     print('解压镜像中')
@@ -268,7 +269,7 @@ def check_sum(distro,url,check):
         print('无法获取文件校验码，是否继续 [y/N]',end=' ')
         a = ''
         input(a)
-        if not a == 'y':
+        if a not in ('y','Y'):
             print('正在退出')
             os.remove(file_path)
             sys.exit(1)
@@ -301,7 +302,7 @@ def check_sum_ubuntu(distro,url):
         print('无法获取文件校验码，是否继续 [y/n]',end=' ')
         a = ''
         input(a)
-        if not a == 'y':
+        if not a in ('y','Y)':
             print('正在退出')
             os.remove(file_path)
             sys.exit(1)
@@ -396,7 +397,7 @@ if __name__ == "__main__":
         if len(sys.argv) < 3:
             print('你需要从镜像列表中指定可用镜像')
             sys.exit(1)
-        elif len(sys.argv) >3:
+        elif len(sys.argv) > 3:
             print('')
             sys.exit(1)
         else:
