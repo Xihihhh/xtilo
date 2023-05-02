@@ -380,6 +380,9 @@ if __name__ == "__main__":
         show_help()
         print('请指定一个命令')
         sys.exit(1)
+    if len(argv) > 3:
+        print('参数过多')
+        sys.exit(1)
     if sys.argv[1] == 'help':
         show_help()
     elif sys.argv[1] == 'pull':
@@ -396,9 +399,6 @@ if __name__ == "__main__":
     elif sys.argv[1] == 'remove':
         if len(sys.argv) < 3:
             print('你需要从镜像列表中指定可用镜像')
-            sys.exit(1)
-        elif len(sys.argv) > 3:
-            print('')
             sys.exit(1)
         else:
             remove_image(sys.argv[2])
