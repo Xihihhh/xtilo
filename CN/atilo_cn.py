@@ -341,9 +341,10 @@ def run_image(arg):
     command += ' --link2symlink'
     command += ' -S '
     command += distro_path
+#   command += ' -b /storage/emulated/0'
 #   command += ' -b /sdcard'
+#   command += ' -b /data/data/com.termux'
 #   command += ' -b /system'
-#   command += ' -b /data/data/com.termux/files/home'
     command += ' -w /root'
     command += ' /usr/bin/env -i'
     command += ' HOME=/root'
