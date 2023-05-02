@@ -301,7 +301,7 @@ def check_sum_ubuntu(distro,url):
         print('无法获取文件校验码，是否继续 [y/n]',end=' ')
         a = ''
         input(a)
-        if not a in ('y','Y)':
+        if not a in ('y','Y'):
             print('正在退出')
             os.remove(file_path)
             sys.exit(1)
