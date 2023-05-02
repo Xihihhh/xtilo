@@ -64,7 +64,6 @@ def get_list():
         #r = requests.get('https://raw.njuu.cf/Xihihhh/atilo/master/src/list_cn.json')  # ping 180ms
         #r = requests.get('https://raw.yzuu.cf/Xihihhh/atilo/master/src/list_cn.json')  # ping 220ms
         r = requests.get('https://raw.kgithub.com/Xihihhh/atilo/master/src/list_cn.json')  # ping 51ms
-        #r = requests.get('https://json.xihi.repl.co')
         #r = requests.get('https://cdn.jsdelivr.net/gh/Xihihhh/atilo@master/src/list_cn.json')  # 疑似 DNS 污染
         #r = requests.get('https://external.githubfast.com/https/raw.githubusercontent.com/Xihihhh/atilo/master/src/list_cn.json')  # 状态码非200
         #r = requests.get('https://raw.githubusercontent.com/Xihihhh/atilo/master/src/list_cn.json')  # github
