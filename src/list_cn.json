@@ -48,12 +48,12 @@
         "zip": "xz"
     },
     "debian": {
-        "version": "buster",
+        "version": "bullseye",
         "lxc": true,
-        "aarch64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/debian/buster/arm64/default/",
-        "armhf": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/debian/buster/armhf/default/",
-        "amd64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/debian/buster/amd64/default/",
-        "i386": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/debian/buster/i386/default/",
+        "aarch64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/debian/bullseye/arm64/default/",
+        "armhf": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/debian/bullseye/armhf/default/",
+        "amd64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/debian/bullseye/amd64/default/",
+        "i386": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/debian/bullseye/i386/default/",
         "check": "lxc",
         "zip": "xz"
     },
