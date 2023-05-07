@@ -5,13 +5,13 @@
 ## 依赖
 
 ``` bash
-apt install python
+apt install python wget
 ```
 
 ## 安装
 
 ``` bash
-git clone https://raw.njuu.cf/Xihihhh/xtilo/master/xtilo.py
+wget https://raw.njuu.cf/Xihihhh/xtilo/master/xtilo.py
 ```
 
 ## 使用方法
