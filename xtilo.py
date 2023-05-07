@@ -276,9 +276,7 @@ def check_sum(distro,url,check):
     r = requests.get(url)
     file_path = atilo_tmp + distro
     if not r.status_code == 200:
-        print('无法获取文件校验码，是否继续 [y/n]', end=' ')
-        a = ''
-        input(a)
+        a = input('无法获取文件校验码，是否继续 [y/n] ')
         if a not in ('y', 'Y'):
             print('正在退出')
             os.remove(file_path)
@@ -309,10 +307,8 @@ def check_sum_ubuntu(distro, url):
     r = requests.get(url)
     file_path = atilo_tmp + distro
     if not r.status_code == 200:
-        print('无法获取文件校验码，是否继续 [y/n]',end=' ')
-        a = ''
-        input(a)
-        if not a in ('y','Y'):
+        a = input('无法获取文件校验码，是否继续 [y/n] ')
+        if a not in ('y','Y'):
             print('正在退出')
             os.remove(file_path)
             sys.exit(1)
