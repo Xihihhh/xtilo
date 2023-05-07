@@ -60,13 +60,13 @@ def load_local():
 
 def get_list():
     try:
-        #r = requests.get('https://gh.sb250.gq/https://raw.githubusercontent.com/Xihihhh/atilo/master/src/list_cn.json')  # 新站 sb250.gq
-        #r = requests.get('https://raw.njuu.cf/Xihihhh/atilo/master/src/list_cn.json')  # ping 180ms
-        #r = requests.get('https://raw.yzuu.cf/Xihihhh/atilo/master/src/list_cn.json')  # ping 220ms
-        r = requests.get('https://raw.kgithub.com/Xihihhh/atilo/master/src/list_cn.json')  # ping 51ms
-        #r = requests.get('https://cdn.jsdelivr.net/gh/Xihihhh/atilo@master/src/list_cn.json')  # 疑似 DNS 污染
-        #r = requests.get('https://external.githubfast.com/https/raw.githubusercontent.com/Xihihhh/atilo/master/src/list_cn.json')  # 状态码非200
-        #r = requests.get('https://raw.githubusercontent.com/Xihihhh/atilo/master/src/list_cn.json')  # github
+        #r = requests.get('https://gh.sb250.gq/https://raw.githubusercontent.com/Xihihhh/xtilo/master/src/list_cn.json')  # 新站 sb250.gq
+        #r = requests.get('https://raw.njuu.cf/Xihihhh/xtilo/master/src/list_cn.json')  # ping 180ms
+        #r = requests.get('https://raw.yzuu.cf/Xihihhh/xtilo/master/src/list_cn.json')  # ping 220ms
+        r = requests.get('https://raw.kgithub.com/Xihihhh/xtilo/master/src/list_cn.json')  # ping 51ms
+        #r = requests.get('https://cdn.jsdelivr.net/gh/Xihihhh/xtilo@master/src/list_cn.json')  # 疑似 DNS 污染
+        #r = requests.get('https://external.githubfast.com/https/raw.githubusercontent.com/Xihihhh/xtilo/master/src/list_cn.json')  # 状态码非200
+        #r = requests.get('https://raw.githubusercontent.com/Xihihhh/xtilo/master/src/list_cn.json')  # github
     except requests.exceptions.ConnectionError:
         print('无法连接到GitHub，可能需要更换镜像链接或代理')
         sys.exit(1)
