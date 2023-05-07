@@ -1,14 +1,17 @@
-# Atilo
+# Xtilo
 
-在Termux安装Linux
+在Termux安装Linux。修改自[YadominJinta/atilo](https://github.com/YadominJinta/atilo)
 
-![Test](https://github.com/YadominJinta/atilo/workflows/Test/badge.svg)
+## 依赖
+
+``` bash
+apt install python
+```
 
 ## 安装
 
 ``` bash
-echo "deb [trusted=yes arch=all] https://yadominjinta.github.io/files/ termux extras" >> $PREFIX/etc/apt/sources.list.d/atilo.list
-apt update && apt install atilo-cn
+git clone https://raw.njuu.cf/Xihihhh/xtilo/master/xtilo.py
 ```
 
 ## 使用方法
@@ -46,11 +49,6 @@ help             帮助
 ## 图形
 
 [在termux上开启图形化](https://yadominjinta.github.io/2018/07/30/GUI-on-termux.html)
-
-## 群组
-
-QQ:[Termux社](https://jq.qq.com/?_wv=1027&k=5jGvbsU)  
-Telegram:[Termux Group ZH_CN](https://t.me/joinchat/EBPa7EI3VrfhsRu-6iJ1yw)
 
 ## 相关项目
 
