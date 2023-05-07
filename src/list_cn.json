@@ -61,9 +61,9 @@
         "version": "chimaera",
         "lxc": true,
         "aarch64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/devuan/chimaera/arm64/default/",
-        "armhf": "https://mirrors.bfsu.edu.cn/lxc-images/images/devuan/chimaera/armhf/default/",
-        "amd64": "https://mirrors.bfsu.edu.cn/lxc-images/images/devuan/chimaera/amd64/default/",
-        "i386": "https://mirrors.bfsu.edu.cn/lxc-images/images/devuan/chimaera/i386/default/",
+        "armhf": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/devuan/chimaera/armhf/default/",
+        "amd64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/devuan/chimaera/amd64/default/",
+        "i386": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/devuan/chimaera/i386/default/",
         "check": "lxc",
         "zip": "xz"
     }
