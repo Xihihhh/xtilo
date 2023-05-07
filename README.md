@@ -34,9 +34,10 @@ help             帮助
 | ------------- | :-----: | :---: | :----: | :---: |
 | Alpine        |    √    |   √   |   √    |   √   |
 | CentOS7       |    √    |   √   |   √    |   √   |
-| CentOS8-Stream|    √    |   ×   |   √    |   ×   |
-| CentOS9-Stream|    √    |   ×   |   √    |   ×   |
+| CentOS-Stream8|    √    |   ×   |   √    |   ×   |
+| CentOS-Stream9|    √    |   ×   |   √    |   ×   |
 | Debian        |    √    |   √   |   √    |   √   |
+| Devuan        |    √    |   √   |   √    |   √   |
 | Fedora        |    √    |   ×   |   √    |   ×   |
 | Kali          |    √    |   √   |   √    |   ×   |
 | openSUSE      |    √    |   ×   |   √    |   ×   |
