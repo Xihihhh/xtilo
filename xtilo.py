@@ -119,7 +119,7 @@ def pull_image(distro):
         print('跳过下载')
     else:
         print('拉取镜像中')
-        r = requests.get(url,stream=True)
+        r = requests.get(url, stream=True)
         if not r.status_code == 200:
             print('无法拉取镜像')
             print('网络错误')
@@ -271,7 +271,7 @@ def extract_fedora():
     zip_f.extractall(distro_path, numeric_owner=True)
 
 
-def check_sum(distro,url,check):
+def check_sum(distro, url, check):
     print('校验文件完整性')
     r = requests.get(url)
     file_path = atilo_tmp + distro
@@ -340,7 +340,7 @@ def clean_tmps():
 def run_image(distro):
     config = load_local()
     if not distro in config.keys():
-        print('未在本地找到' + distro + '镜像')
+        print('未在本地找到', distro, '镜像')
         sys.exit(1)
     distro_path = atilo_home + distro
     infos = config.get(distro)
@@ -369,7 +369,7 @@ def run_image(distro):
 
 
 def show_help():
-    print('Atilo\t\t' + atilo_version )
+    print('Atilo\t\t ', atilo_versiom)
     print('Usage: atilo [命令] [参数]\n')
     print('Atilo 是一个用来帮助你在termux上安装不同的GNU/Linux发行版的程序\n')
     print('命令:')
