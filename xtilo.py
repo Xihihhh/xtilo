@@ -83,7 +83,7 @@ def show_list():
     config = load_local()
     table = PrettyTable()
     arch = check_arch()
-    table.field_names = ["名称","版本","已安装","可安装"]
+    table.field_names = ["名称", "版本", "已安装", "可安装"]
     for i in lists.get('linux'):
         name = i
         infos = lists.get(name)
