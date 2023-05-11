@@ -205,7 +205,8 @@ def config_image(distro, infos):
         f.write('nameserver 223.6.6.6\n')
     group = distro_path + '/etc/group'
     with os.popen('whoami') as p:
-        userid = p.read()[4 : len(userid) - 1]
+        userid = p.read()
+        userid = userid[4 : len(userid) - 1]
         gp1 = '20' + userid
         gp2 = '50' + userid
     with open(group, 'a') as g:
