@@ -361,7 +361,7 @@ def run_image(distro):
     infos = config.get(distro)
     command = ['proot']
     command.append(' --link2symlink')
-    command.append(' -S')
+    command.append(' -S ')
     command.append(distro_path)
    #command.append(' -b /storage/emulated/0')
    #command.append(' -b /sdcard')
