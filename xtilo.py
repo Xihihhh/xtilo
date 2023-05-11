@@ -234,7 +234,7 @@ unset LD_PRELOAD
 command='proot'
 command+=' --link2symlink'
 command+=' -S'
-command+=' %s' % distro_path
+command+=' {0}'
 #command+=' -b /storage/emulated/0'
 #command+=' -b /sdcard'
 #command+=' -b /data/data/com.termux'
@@ -246,7 +246,7 @@ command+=' LANG=C.UTF-8'
 command+=' PATH=/bin:/usr/bin:/sbin:/usr/sbin:/usr/local/bin:/usr/local/sbin'
 command+=' TERM=xterm-256color'
 command+=' /bin/'
-command+='""" % distro_path)
+command+='""".format(disro_path))
         if 'shell' in infos.keys():
             s.write(infos.get('shell'))
         else:
