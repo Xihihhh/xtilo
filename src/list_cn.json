@@ -66,7 +66,7 @@
         "i386": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/devuan/chimaera/i386/default/",
         "check": "lxc",
         "zip": "xz"
-    }
+    },
     "fedora": {
         "version": 38,
         "aarch64": "https://mirrors.bfsu.edu.cn/fedora/releases/38/Container/aarch64/images/Fedora-Container-Base-38-1.6.aarch64.tar.xz",
