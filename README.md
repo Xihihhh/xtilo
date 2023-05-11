@@ -17,10 +17,10 @@ wget https://raw.njuu.cf/Xihihhh/xtilo/master/xtilo.py
 ## 使用方法
 
 ``` bash
-Atilo           2.0
-Usage: atilo [命令] [参数]
+Xtilo           2.1.5
+Usage: xtilo [命令] [参数]
 
-Atilo 是一个用来帮助你在termux上安装不同的GNU/Linux发行版的程序
+Xtilo 是一个用来帮助你在termux上安装不同的GNU/Linux发行版的程序
 
 命令:
 images           列出可用镜像
