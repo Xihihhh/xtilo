@@ -5,7 +5,7 @@
 ## 依赖
 
 ``` bash
-apt install python wget
+pkg install proot python wget -y
 ```
 
 ## 安装
@@ -20,7 +20,7 @@ wget https://raw.njuu.cf/Xihihhh/xtilo/master/xtilo.py
 Xtilo           2.1.5
 Usage: xtilo [命令] [参数]
 
-Xtilo 是一个用来帮助你在termux上安装不同的GNU/Linux发行版的程序
+Xtilo 是一个用来帮助你在 termux 上安装不同的 GNU/Linux 发行版的程序
 
 命令:
 images           列出可用镜像
