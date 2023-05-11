@@ -52,7 +52,7 @@ def load_local():
                 'config': {
                     'arch': arch,
                     'version': XTILO_VERSION,
-                    'imgList': 'https://raw.fastgit.org/Xihihhh/xtilo/master/src/list_cn.json'
+                    'imgList': 'https://gitee.com/xihihhh/xtilo/raw/master/src/list_cn.json'
                 }
             }
             json.dump(data, f, indent=4)
@@ -86,8 +86,8 @@ def get_list():
         imgList = load_local()['config']['imgList']
         r = requests.get(imgList)
     except requests.exceptions.ConnectionError:
-        print('无法连接到 GitHub')
-        print('请使用 xtilo set [镜像列表链接] 更换链接或代理')
+        print('无法获取镜像列表')
+        print('请使用 xtilo set [镜像列表链接] 更换链接')
         sys.exit(1)
     if not r.status_code == 200:
         print('无法获取镜像列表')
