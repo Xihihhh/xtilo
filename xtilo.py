@@ -246,7 +246,7 @@ command+=' LANG=C.UTF-8'
 command+=' PATH=/bin:/usr/bin:/sbin:/usr/sbin:/usr/local/bin:/usr/local/sbin'
 command+=' TERM=xterm-256color'
 command+=' /bin/'
-command+='""".format(disro_path))
+command+='""".format(distro_path))
         if 'shell' in infos.keys():
             s.write(infos.get('shell'))
         else:
