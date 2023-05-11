@@ -385,8 +385,8 @@ def run_image(distro):
 def show_help():
     print('Xtilo\t\t', XTILO_VERSION)
     print('Usage: xtilo [命令] [参数]\n')
-    print('Xtilo 是一个用来帮助你在 termux 上安装不同的 GNU/Linux 发行版的程序\n')
-    print('它由 Xihi 修改自 Atilo')
+    print('Xtilo 是一个用来帮助你在 termux 上安装不同的 GNU/Linux 发行版的程序')
+    print('它由 Xihi 修改自 Atilo\n')
     print('命令：')
     print('images\t\t 列出可用镜像')
     print('set\t\t 设置镜像列表链接')
