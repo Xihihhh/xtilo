@@ -18,7 +18,7 @@ from bs4 import BeautifulSoup
 XTILO_HOME = os.getenv('HOME') + '/.xtilo/'
 XTILO_TMP  = XTILO_HOME + 'tmp/'
 XTILO_CONFIG = XTILO_HOME + 'local.json'
-XTILO_VERSION = '2.1.5'
+XTILO_VERSION = '2.1.7'
 
 
 def check_dir():
@@ -52,7 +52,7 @@ def load_local():
                 'config': {
                     'arch': arch,
                     'version': XTILO_VERSION,
-                    'imgList': 'https://gitee.com/xihihhh/xtilo/raw/master/src/list_cn.json'
+                    'imgList': 'https://raw.fastgit.org/Xihihhh/xtilo/master/src/list_cn.json'
                 }
             }
             json.dump(data, f, indent=4)
@@ -100,13 +100,14 @@ def show_list():
     config = load_local()
     table = PrettyTable()
     arch = check_arch()
-    table.field_names = ['名称', '版本', '已安装', '可安装']
-    for name in lists.get('linux'):
-        infos = lists.get(name)
+    table.field_names = ['名称', '版本', '别名', '已安装', '可安装']
+    for alias in lists.get('linux'):
+        infos = lists.get(alias)
+        name = infos.get('name')
         version = infos.get('version')
-        installed = name in config.keys()
+        installed = alias in config.keys()
         installable = arch in infos.keys()
-        table.add_row([name, version, installed, installable])
+        table.add_row([name, version, alias, installed, installable])
     print(table.get_string())
 
 
@@ -292,7 +293,7 @@ def check_sum(distro, url, check):
     r = requests.get(url)
     file_path = XTILO_TMP + distro
     if not r.status_code == 200:
-        a = input('无法获取文件校验码，是否继续 [y/n] ')
+        a = input('无法获取文件校验码，是否继续 [Y/n] ')
         if a not in ('y', 'Y'):
             print('正在退出')
             os.remove(file_path)
@@ -323,7 +324,7 @@ def check_sum_ubuntu(distro, url):
     r = requests.get(url)
     file_path = XTILO_TMP + distro
     if not r.status_code == 200:
-        a = input('无法获取文件校验码，是否继续 [y/n] ')
+        a = input('无法获取文件校验码，是否继续 [Y/n] ')
         if a not in ('y','Y'):
             print('正在退出')
             os.remove(file_path)
@@ -363,10 +364,10 @@ def run_image(distro):
     command.append(' --link2symlink')
     command.append(' -S ')
     command.append(distro_path)
-   #command.append(' -b /storage/emulated/0')
-   #command.append(' -b /sdcard')
-   #command.append(' -b /data/data/com.termux')
-   #command.append(' -b /system')
+    #command.append(' -b /storage/emulated/0')
+    #command.append(' -b /sdcard')
+    #command.append(' -b /data/data/com.termux')
+    #command.append(' -b /system')
     command.append(' -w /root')
     command.append(' /usr/bin/env -i')
     command.append(' HOME=/root')
@@ -386,7 +387,7 @@ def run_image(distro):
 def show_help():
     print('Xtilo\t\t', XTILO_VERSION)
     print('Usage: xtilo [命令] [参数]\n')
-    print('Xtilo 是一个用来帮助你在 termux 上安装不同的 GNU/Linux 发行版的程序')
+    print('Xtilo 是一个用来帮助你在 Termux 上安装不同的 GNU/Linux 发行版的程序')
     print('它由 Xihi 修改自 Atilo\n')
     print('命令：')
     print('images\t\t 列出可用镜像')
