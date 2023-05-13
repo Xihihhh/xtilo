@@ -52,7 +52,7 @@ def load_local():
                 'config': {
                     'arch': arch,
                     'version': XTILO_VERSION,
-                    'imgList': 'https://raw.fastgit.org/Xihihhh/xtilo/master/src/list_cn.json'
+                    'imgList': 'https://gitee.com/xihihhh/xtilo/raw/master/src/list_cn.json'
                 }
             }
             json.dump(data, f, indent=4)
