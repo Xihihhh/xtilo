@@ -12,6 +12,7 @@
     ],
     "update": "2023-05-13",
     "alpine": {
+        "name": "Alpine Linux",
         "version": "3.18.0_rc6",
         "shell": "ash",
         "aarch64": "https://mirrors.bfsu.edu.cn/alpine/latest-stable/releases/aarch64/alpine-minirootfs-3.18.0_rc6-aarch64.tar.gz",
@@ -22,6 +23,7 @@
         "zip": "gz"
     },
     "centos": {
+        "name": "CentOS Linux",
         "version": "7",
         "lxc": true,
         "aarch64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/centos/7/arm64/default/",
@@ -32,7 +34,8 @@
         "zip": "xz"
     },
     "centos8": {
-        "version": "Stream",
+        "name": "CentOS Stream",
+        "version": "8",
         "lxc": true,
         "aarch64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/centos/8-Stream/arm64/default/",
         "amd64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/centos/8-Stream/amd64/default/",
@@ -40,7 +43,8 @@
         "zip": "xz"
     },
     "centos9": {
-        "version": "Stream",
+        "name": "CentOS Stream",
+        "version": "9",
         "lxc": true,
         "aarch64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/centos/9-Stream/arm64/default/",
         "amd64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/centos/9-Stream/amd64/default/",
@@ -48,6 +52,7 @@
         "zip": "xz"
     },
     "debian": {
+        "name": "Debian",
         "version": "bullseye",
         "lxc": true,
         "aarch64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/debian/bullseye/arm64/default/",
@@ -58,6 +63,7 @@
         "zip": "xz"
     },
     "devuan": {
+        "name": "Devuan",
         "version": "chimaera",
         "lxc": true,
         "aarch64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/devuan/chimaera/arm64/default/",
@@ -68,13 +74,15 @@
         "zip": "xz"
     },
     "fedora": {
-        "version": 38,
+        "name": "Fedora Linux",
+        "version": "38",
         "aarch64": "https://mirrors.bfsu.edu.cn/fedora/releases/38/Container/aarch64/images/Fedora-Container-Base-38-1.6.aarch64.tar.xz",
         "amd64": "https://mirrors.bfsu.edu.cn/fedora/releases/38/Container/x86_64/images/Fedora-Container-Base-38-1.6.x86_64.tar.xz",
         "check": "no",
         "zip": "fedora"
     },
     "kali": {
+        "name": "Kali Linux",
         "version": "latest",
         "lxc": true,
         "aarch64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/kali/current/arm64/default/",
@@ -84,6 +92,7 @@
         "zip": "xz"
     },
     "opensuse": {
+        "name": "openSUSE",
         "version": "Tumbleweed",
         "lxc": true,
         "aarch64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/opensuse/tumbleweed/arm64/default/",
@@ -92,6 +101,7 @@
         "zip": "xz"
     },
     "ubuntu": {
+        "name": "Ubuntu",
         "version": "jammy",
         "lxc": true,
         "aarch64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/ubuntu/jammy/arm64/default/",
