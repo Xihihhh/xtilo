@@ -6,6 +6,7 @@
 
 ``` bash
 pkg install proot python wget -y
+pip install requests tqdm prettytable bs4
 ```
 
 ## 安装
@@ -17,13 +18,14 @@ wget https://raw.njuu.cf/Xihihhh/xtilo/master/xtilo.py
 ## 使用方法
 
 ``` bash
-Xtilo           2.1.5
+Xtilo           2.1.7
 Usage: xtilo [命令] [参数]
 
 Xtilo 是一个用来帮助你在 termux 上安装不同的 GNU/Linux 发行版的程序
 
 命令:
 images           列出可用镜像
+set              设置镜像列表链接
 remove           移除本地的镜像
 pull             拉取远的镜像
 run              运行镜像
@@ -35,14 +37,13 @@ help             帮助
 
 | 发行版        | aarch64 |  arm  | x86_64 | i386  |
 | ------------- | :-----: | :---: | :----: | :---: |
-| Alpine        |    √    |   √   |   √    |   √   |
-| CentOS7       |    √    |   √   |   √    |   √   |
-| CentOS-Stream8|    √    |   ×   |   √    |   ×   |
-| CentOS-Stream9|    √    |   ×   |   √    |   ×   |
+| Alpine Linux  |    √    |   √   |   √    |   √   |
+| CentOS Linux  |    √    |   √   |   √    |   √   |
+| CentOS Stream |    √    |   ×   |   √    |   ×   |
 | Debian        |    √    |   √   |   √    |   √   |
 | Devuan        |    √    |   √   |   √    |   √   |
-| Fedora        |    √    |   ×   |   √    |   ×   |
-| Kali          |    √    |   √   |   √    |   ×   |
+| Fedora Linux  |    √    |   ×   |   √    |   ×   |
+| Kali Linux    |    √    |   √   |   √    |   ×   |
 | openSUSE      |    √    |   ×   |   √    |   ×   |
 | Ubuntu        |    √    |   √   |   √    |   ×   |
 
