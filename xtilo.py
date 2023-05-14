@@ -2,7 +2,7 @@
 
 # Copyright 2023-2024 by Xihihhh. All rights reserved.
 # https://github.com/Xihihhh/xtilo has info about the project.
-# https://github.com/Xihihhh/xtilo/blob/master/CONTRIBUTORS.md Thank you for help.
+# https://github.com/YadominJinta/atilo/blob/master/CONTRIBUTORS.md Thank you for help.
 
 import os
 import tarfile
@@ -15,10 +15,11 @@ from tqdm import tqdm
 from prettytable import PrettyTable 
 from bs4 import BeautifulSoup
 
+FILE_NAME = os.path.basename(__file__)
 XTILO_HOME = os.getenv('HOME') + '/.xtilo/'
 XTILO_TMP  = XTILO_HOME + 'tmp/'
 XTILO_CONFIG = XTILO_HOME + 'local.json'
-XTILO_VERSION = '2.1.7'
+XTILO_VERSION = '2.2.0'
 
 
 def check_dir():
@@ -52,7 +53,7 @@ def load_local():
                 'config': {
                     'arch': arch,
                     'version': XTILO_VERSION,
-                    'imgList': 'https://raw.fastgit.org/Xihihhh/xtilo/master/src/list_cn.json'
+                    'imgList': 'https://gitee.com/xihihhh/xtilo/raw/master/src/list_cn.json'
                 }
             }
             json.dump(data, f, indent=4)
@@ -87,7 +88,7 @@ def get_list():
         r = requests.get(imgList)
     except requests.exceptions.ConnectionError:
         print('无法获取镜像列表')
-        print('请使用 xtilo set [镜像列表链接] 更换链接')
+        print('请使用 %s set [镜像列表链接] 更换链接' % FILE_NAME)
         sys.exit(1)
     if not r.status_code == 200:
         print('无法获取镜像列表')
@@ -198,7 +199,212 @@ def remove_image(distro):
 def config_image(distro, infos):
     print('配置镜像中')
     distro_path = XTILO_HOME + distro
-    resolv_conf = '{0}/etc/resolv.conf'.format(distro_path)
+    proc = distro_path + '/proc/'
+    with open('{}.uptime'.format(proc), 'w') as u:
+        u.write('124.08 932.80\n')
+    with open('{}.loadavg'.format(proc), 'w') as l:
+        l.write('0.12 0.07 0.02 2/165 765\n')
+    with open('{}.version'.format(proc), 'w') as v:
+        v.write('Linux version {}-Xtilo\n'.format(XTILO_VERSION))
+    with open('{}.stat'.format(proc), 'w') as s:
+        s.write('''cpu  1957 0 2877 93280 262 342 254 87 0 0
+cpu0 31 0 226 12027 82 10 4 9 0 0
+cpu1 45 0 664 11144 21 263 233 12 0 0
+cpu2 494 0 537 11283 27 10 3 8 0 0
+cpu3 359 0 234 11723 24 26 5 7 0 0
+cpu4 295 0 268 11772 10 12 2 12 0 0
+cpu5 270 0 251 11833 15 3 1 10 0 0
+cpu6 430 0 520 11386 30 8 1 12 0 0
+cpu7 30 0 172 12108 50 8 1 13 0 0
+intr 127541 38 290 0 0 0 0 4 0 1 0 0 25329 258 0 5777 277 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ctxt 14022
+btime 1680020856
+processes 772
+procs_running 2
+procs_blocked 0
+softirq 75663 0 5903 6 25375 10774 0 243 11685 0 21677
+''')
+    with open('{}.vmstat'.format(proc), 'w') as vm:
+        vm.write('''nr_free_pages 1743136
+nr_zone_inactive_anon 179281
+nr_zone_active_anon 7183
+nr_zone_inactive_file 22858
+nr_zone_active_file 51328
+nr_zone_unevictable 642
+nr_zone_write_pending 0
+nr_mlock 0
+nr_bounce 0
+nr_zspages 0
+nr_free_cma 0
+numa_hit 1259626
+numa_miss 0
+numa_foreign 0
+numa_interleave 720
+numa_local 1259626
+numa_other 0
+nr_inactive_anon 179281
+nr_active_anon 7183
+nr_inactive_file 22858
+nr_active_file 51328
+nr_unevictable 642
+nr_slab_reclaimable 8091
+nr_slab_unreclaimable 7804
+nr_isolated_anon 0
+nr_isolated_file 0
+workingset_nodes 0
+workingset_refault_anon 0
+workingset_refault_file 0
+workingset_activate_anon 0
+workingset_activate_file 0
+workingset_restore_anon 0
+workingset_restore_file 0
+workingset_nodereclaim 0
+nr_anon_pages 7723
+nr_mapped 8905
+nr_file_pages 253569
+nr_dirty 0
+nr_writeback 0
+nr_writeback_temp 0
+nr_shmem 178741
+nr_shmem_hugepages 0
+nr_shmem_pmdmapped 0
+nr_file_hugepages 0
+nr_file_pmdmapped 0
+nr_anon_transparent_hugepages 1
+nr_vmscan_write 0
+nr_vmscan_immediate_reclaim 0
+nr_dirtied 0
+nr_written 0
+nr_throttled_written 0
+nr_kernel_misc_reclaimable 0
+nr_foll_pin_acquired 0
+nr_foll_pin_released 0
+nr_kernel_stack 2780
+nr_page_table_pages 344
+nr_sec_page_table_pages 0
+nr_swapcached 0
+pgpromote_success 0
+pgpromote_candidate 0
+nr_dirty_threshold 356564
+nr_dirty_background_threshold 178064
+pgpgin 890508
+pgpgout 0
+pswpin 0
+pswpout 0
+pgalloc_dma 272
+pgalloc_dma32 261
+pgalloc_normal 1328079
+pgalloc_movable 0
+pgalloc_device 0
+allocstall_dma 0
+allocstall_dma32 0
+allocstall_normal 0
+allocstall_movable 0
+allocstall_device 0
+pgskip_dma 0
+pgskip_dma32 0
+pgskip_normal 0
+pgskip_movable 0
+pgskip_device 0
+pgfree 3077011
+pgactivate 0
+pgdeactivate 0
+pglazyfree 0
+pgfault 176973
+pgmajfault 488
+pglazyfreed 0
+pgrefill 0
+pgreuse 19230
+pgsteal_kswapd 0
+pgsteal_direct 0
+pgsteal_khugepaged 0
+pgdemote_kswapd 0
+pgdemote_direct 0
+pgdemote_khugepaged 0
+pgscan_kswapd 0
+pgscan_direct 0
+pgscan_khugepaged 0
+pgscan_direct_throttle 0
+pgscan_anon 0
+pgscan_file 0
+pgsteal_anon 0
+pgsteal_file 0
+zone_reclaim_failed 0
+pginodesteal 0
+slabs_scanned 0
+kswapd_inodesteal 0
+kswapd_low_wmark_hit_quickly 0
+kswapd_high_wmark_hit_quickly 0
+pageoutrun 0
+pgrotated 0
+drop_pagecache 0
+drop_slab 0
+oom_kill 0
+numa_pte_updates 0
+numa_huge_pte_updates 0
+numa_hint_faults 0
+numa_hint_faults_local 0
+numa_pages_migrated 0
+pgmigrate_success 0
+pgmigrate_fail 0
+thp_migration_success 0
+thp_migration_fail 0
+thp_migration_split 0
+compact_migrate_scanned 0
+compact_free_scanned 0
+compact_isolated 0
+compact_stall 0
+compact_fail 0
+compact_success 0
+compact_daemon_wake 0
+compact_daemon_migrate_scanned 0
+compact_daemon_free_scanned 0
+htlb_buddy_alloc_success 0
+htlb_buddy_alloc_fail 0
+cma_alloc_success 0
+cma_alloc_fail 0
+unevictable_pgs_culled 27002
+unevictable_pgs_scanned 0
+unevictable_pgs_rescued 744
+unevictable_pgs_mlocked 744
+unevictable_pgs_munlocked 744
+unevictable_pgs_cleared 0
+unevictable_pgs_stranded 0
+thp_fault_alloc 13
+thp_fault_fallback 0
+thp_fault_fallback_charge 0
+thp_collapse_alloc 4
+thp_collapse_alloc_failed 0
+thp_file_alloc 0
+thp_file_fallback 0
+thp_file_fallback_charge 0
+thp_file_mapped 0
+thp_split_page 0
+thp_split_page_failed 0
+thp_deferred_split_page 1
+thp_split_pmd 1
+thp_scan_exceed_none_pte 0
+thp_scan_exceed_swap_pte 0
+thp_scan_exceed_share_pte 0
+thp_split_pud 0
+thp_zero_page_alloc 0
+thp_zero_page_alloc_failed 0
+thp_swpout 0
+thp_swpout_fallback 0
+balloon_inflate 0
+balloon_deflate 0
+balloon_migrate 0
+swap_ra 0
+swap_ra_hit 0
+ksm_swpin_copy 0
+cow_ksm 0
+zswpin 0
+zswpout 0
+direct_map_level2_splits 29
+direct_map_level3_splits 0
+nr_unstable 0
+''')
+    resolv_conf = '{}/etc/resolv.conf'.format(distro_path)
     if os.path.islink(resolv_conf):
         os.unlink(resolv_conf)
     with open(resolv_conf, 'w') as f:
@@ -215,14 +421,15 @@ def config_image(distro, infos):
 3003:x:3003:
 9997:x:9997:
 {0}:x:{0}:
-{1}:x:{1}:'''.format(gp1, gp2))
+{1}:x:{1}:
+'''.format(gp1, gp2))
     config = load_local()
     config.update({distro: infos})
     with open(XTILO_CONFIG, 'w') as f:
         json.dump(config, f, indent=4)
     script(distro)
     print('一切完成')
-    print('使用 xtilo run %s 来运行' % distro)
+    print('使用 %s run %s 来运行' % (FILE_NAME, distro))
 
 
 def script(distro):
@@ -231,21 +438,42 @@ def script(distro):
     script = '{0}start-{1}.sh'.format(XTILO_HOME, distro)
     with open(script, 'w') as s:
         s.write("""#!/usr/bin/bash
+DISTRO_PATH={}
 unset LD_PRELOAD
 command='proot'
 command+=' --link2symlink'
-command+=' -S'
-command+=' {0}'
-#command+=' -b /storage/emulated/0'
+command+=' --kill-on-exit'
+command+=' -S '
+command+=$DISTRO_PATH
+command+=' --cwd=/root'
+#command+=' -b /storage'
 #command+=' -b /sdcard'
 #command+=' -b /data/data/com.termux'
-#command+=' -b /system'
+if [ -d '/apex' ]; then
+    command+=' -b /apex'
+fi
+command+=' -b /system'
+command+=' -b /dev'
+command+=' -b /dev/urandom:/dev/random'
+command+=" -b ${{DISTRO_PATH}}/tmp:/dev/shm"
+command+=' -b /proc'
+command+=' -b /proc/self/fd:/dev/fd'
+command+=' -b /proc/self/fd/0:/dev/stdin'
+command+=' -b /proc/self/fd/1:/dev/stdout'
+command+=' -b /proc/self/fd/2:/dev/stderr'
+command+=' -b /sys'
+command+=" -b ${{DISTRO_PATH}}/proc/.loadavg:/proc/loadavg"
+command+=" -b ${{DISTRO_PATH}}/proc/.stat:/proc/stat"
+command+=" -b ${{DISTRO_PATH}}/proc/.uptime:/proc/uptime"
+command+=" -b ${{DISTRO_PATH}}/proc/.version:/proc/version"
+command+=" -b ${{DISTRO_PATH}}/proc/.vmstat:/proc/vmstat"
 command+=' -w /root'
 command+=' /usr/bin/env -i'
 command+=' HOME=/root'
-command+=' LANG=C.UTF-8'
+command+=' LANG=zh_CN.UTF-8'
 command+=' PATH=/bin:/usr/bin:/sbin:/usr/sbin:/usr/local/bin:/usr/local/sbin'
 command+=' TERM=xterm-256color'
+command+=' TMPDIR=/tmp'
 command+=' /bin/'
 command+='""".format(distro_path))
         if 'shell' in infos.keys():
@@ -350,7 +578,7 @@ def check_sum_ubuntu(distro, url):
 
 def clean_tmps():
     print('正在清除缓存')
-    os.system('rm -rf {0}*'.format(XTILO_TMP))
+    os.system('rm -rf {}*'.format(XTILO_TMP))
 
 
 def run_image(distro):
@@ -362,18 +590,38 @@ def run_image(distro):
     infos = config.get(distro)
     command = ['proot']
     command.append(' --link2symlink')
+    command.append(' --kill-on-exit')
     command.append(' -S ')
     command.append(distro_path)
-    #command.append(' -b /storage/emulated/0')
+    command.append(' --cwd=/root')
+    #command.append(' -b /storage')
     #command.append(' -b /sdcard')
     #command.append(' -b /data/data/com.termux')
-    #command.append(' -b /system')
+    command.append(' -b /vendor')
+    if os.path.isdir('/apex'):
+        command.append(' -b /apex')
+    command.append(' -b /system')
+    command.append(' -b /dev')
+    command.append(' -b /dev/urandom:/dev/random')
+    command.append(' -b {}/tmp:/dev/shm'.format(distro_path))
+    command.append(' -b /proc')
+    command.append(' -b /proc/self/fd:/dev/fd')
+    command.append(' -b /proc/self/fd/0:/dev/stdin')
+    command.append(' -b /proc/self/fd/1:/dev/stdout')
+    command.append(' -b /proc/self/fd/2:/dev/stderr')
+    command.append(' -b /sys')
+    command.append(' -b {}/proc/.loadavg:/proc/loadavg'.format(distro_path))
+    command.append(' -b {}/proc/.stat:/proc/stat'.format(distro_path))
+    command.append(' -b {}/proc/.uptime:/proc/uptime'.format(distro_path))
+    command.append(' -b {}/proc/.version:/proc/version'.format(distro_path))
+    command.append(' -b {}/proc/.vmstat:/proc/vmstat'.format(distro_path))
     command.append(' -w /root')
     command.append(' /usr/bin/env -i')
     command.append(' HOME=/root')
-    command.append(' LANG=C.UTF-8')
+    command.append(' LANG=zh_CN.UTF-8')
     command.append(' PATH=/bin:/usr/bin:/sbin:/usr/sbin:/usr/local/bin:/usr/local/sbin')
     command.append(' TERM=xterm-256color')
+    command.append(' TMPDIR=/tmp')
     command.append(' /bin/')
     os.unsetenv('LD_PRELOAD')
     if 'shell' in infos.keys():
@@ -386,7 +634,7 @@ def run_image(distro):
 
 def show_help():
     print('Xtilo\t\t', XTILO_VERSION)
-    print('Usage: xtilo [命令] [参数]\n')
+    print('Usage: %s [命令] [参数]\n' % FILE_NAME)
     print('Xtilo 是一个用来帮助你在 Termux 上安装不同的 GNU/Linux 发行版的程序')
     print('它由 Xihi 修改自 Atilo\n')
     print('命令：')
