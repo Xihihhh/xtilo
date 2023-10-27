@@ -1,7 +1,7 @@
-#! /usr/bin/env python3
+#!/usr/bin/env python3
 
 # Copyright 2023-2024 by Xihihhh. All rights reserved.
-# https://github.com/Xihihhh/xtilo has info about the project.
+# https://gitee.com/Xihihhh/xtilo has info about the project.
 # https://github.com/YadominJinta/atilo/blob/master/CONTRIBUTORS.md Thank you for help.
 
 import os
@@ -16,10 +16,10 @@ from prettytable import PrettyTable
 from bs4 import BeautifulSoup
 
 FILE_NAME = os.path.basename(__file__)
-XTILO_HOME = os.getenv('HOME') + '/.xtilo/'
-XTILO_TMP  = XTILO_HOME + 'tmp/'
-XTILO_CONFIG = XTILO_HOME + 'local.json'
-XTILO_VERSION = '2.2.0'
+XTILO_HOME = f"{os.getenv('HOME')}/.xtilo/"
+XTILO_TMP  = f'{XTILO_HOME}tmp/'
+XTILO_CONFIG = f'{XTILO_HOME}local.json'
+XTILO_VERSION = '2.2.1'
 
 
 def check_dir():
@@ -63,23 +63,23 @@ def load_local():
 
 
 def set_list(url):
-    if url == None:
-        imgList = input('请输入新的镜像列表链接：')
-        if imgList == '':
-            print('未输入任何内容')
-            sys.exit(1)
-        else:
-            config = load_local()
-            config['config']['imgList'] = imgList
-            with open(XTILO_CONFIG, 'w') as f:
-                json.dump(config, f, indent=4)
-            print('成功设置')
-    else:
+    if url:
         config = load_local()
         config['config']['imgList'] = url
         with open(XTILO_CONFIG, 'w') as f:
             json.dump(config, f, indent=4)
         print('成功设置')
+    else:
+        imgList = input('请输入新的镜像列表链接：')
+        if imgList:
+            config = load_local()
+            config['config']['imgList'] = imgList
+            with open(XTILO_CONFIG, 'w') as f:
+                json.dump(config, f, indent=4)
+            print('成功设置')
+        else:
+            print('未输入任何内容')
+            sys.exit(1)
 
 
 def get_list():
@@ -88,7 +88,7 @@ def get_list():
         r = requests.get(imgList)
     except requests.exceptions.ConnectionError:
         print('无法获取镜像列表')
-        print('请使用 %s set [镜像列表链接] 更换链接' % FILE_NAME)
+        print(f'请使用 {FILE_NAME} set [镜像列表链接] 更换链接')
         sys.exit(1)
     if not r.status_code == 200:
         print('无法获取镜像列表')
@@ -118,22 +118,22 @@ def pull_image(distro):
     config = load_local()
     distro_tmp = XTILO_TMP + distro
     if distro in config.keys():
-        print('%s 已被安装' % distro)
+        print(f'{distro} 已被安装')
         sys.exit(1)
     if distro not in lists.keys():
-        print('未找到 %s' % distro)
+        print(f'未找到 {distro}')
         sys.exit(1)
     infos = lists.get(distro)
     if arch not in infos.keys():
-        print('%s 不支持该架构' % distro)
+        print(f'{distro} 不支持该架构')
         sys.exit(1)
     if infos.get('lxc'):
         time_stamp = get_lxc(infos.get(arch))
-        url = '{0}{1}/rootfs.tar.xz'.format(infos.get(arch), time_stamp)
+        url = f'{infos.get(arch)}{time_stamp}/rootfs.tar.xz'
     else:
         url = infos.get(arch)
     if os.path.isfile(distro_tmp):
-        print('%s 已缓存' % distro)
+        print(f'{distro} 已缓存')
         print('跳过下载')
     else:
         print('拉取镜像中')
@@ -152,13 +152,13 @@ def pull_image(distro):
         r.close()
         t.close()
     if infos.get('check') == 'no':
-        print('%s 不支持校验' % distro)
+        print(f'{distro} 不支持校验')
         print('跳过校验')
     elif infos.get('check') == 'lxc':
-        check_url = '{0}{1}/SHA256SUMS'.format(infos.get(arch), time_stamp)
+        check_url = f'{infos.get(arch)}{time_stamp}/SHA256SUMS'
         check_sum(distro=distro, url=check_url, check='sha256')
     else:
-        check_url = url + '.' + infos.get('check')
+        check_url = f"{url}.{infos.get('check')}"
         check_sum(distro=distro, url=check_url, check=infos.get('check'))
     if not infos.get('zip') == 'fedora':
         extract_file(distro, infos.get('zip'))
@@ -182,31 +182,33 @@ def get_lxc(url):
 def remove_image(distro):
     distro_path = XTILO_HOME + distro
     if os.path.isdir(distro_path):
-        print('移除 %s 镜像' % distro)
-        os.system('chmod -R 777 %s' % distro_path)
-        os.system('rm -rf %s' % distro_path)
-        script = '{0}start-{1}.sh'.format(XTILO_HOME, distro)
+        print(f'移除 {distro} 镜像')
+        os.system(f'chmod -R 777 {distro_path}')
+        os.system(f'rm -rf {distro_path}')
+        script = f'{XTILO_HOME}start-{distro}.sh'
         if os.path.isfile(script):
-            os.system('rm %s' % script)
+            os.system(f'rm {script}')
         config = load_local()
         del config[distro]
         with open(XTILO_CONFIG, 'w') as f:
             json.dump(config, f, indent=4)
     else:
-        print('未找到 %s 镜像' % distro)
+        print(f'未找到 {distro} 镜像')
 
 
 def config_image(distro, infos):
     print('配置镜像中')
     distro_path = XTILO_HOME + distro
-    proc = distro_path + '/proc/'
-    with open('{}.uptime'.format(proc), 'w') as u:
+    proc = f'{distro_path}/proc/'
+    os.system(f'mkdir -p {proc}')
+    os.system(f'chmod 700 {proc}')
+    with open(f'{proc}.uptime', 'w') as u:
         u.write('124.08 932.80\n')
-    with open('{}.loadavg'.format(proc), 'w') as l:
+    with open(f'{proc}.loadavg', 'w') as l:
         l.write('0.12 0.07 0.02 2/165 765\n')
-    with open('{}.version'.format(proc), 'w') as v:
-        v.write('Linux version {}-Xtilo\n'.format(XTILO_VERSION))
-    with open('{}.stat'.format(proc), 'w') as s:
+    with open(f'{proc}.version', 'w') as v:
+        v.write(f'Linux version {XTILO_VERSION}-Xtilo\n')
+    with open(f'{proc}.stat', 'w') as s:
         s.write('''cpu  1957 0 2877 93280 262 342 254 87 0 0
 cpu0 31 0 226 12027 82 10 4 9 0 0
 cpu1 45 0 664 11144 21 263 233 12 0 0
@@ -224,7 +226,7 @@ procs_running 2
 procs_blocked 0
 softirq 75663 0 5903 6 25375 10774 0 243 11685 0 21677
 ''')
-    with open('{}.vmstat'.format(proc), 'w') as vm:
+    with open(f'{proc}.vmstat', 'w') as vm:
         vm.write('''nr_free_pages 1743136
 nr_zone_inactive_anon 179281
 nr_zone_active_anon 7183
@@ -404,41 +406,45 @@ direct_map_level2_splits 29
 direct_map_level3_splits 0
 nr_unstable 0
 ''')
-    resolv_conf = '{}/etc/resolv.conf'.format(distro_path)
+    resolv_conf = f'{distro_path}/etc/resolv.conf'
     if os.path.islink(resolv_conf):
         os.unlink(resolv_conf)
     with open(resolv_conf, 'w') as f:
         f.write('nameserver 223.5.5.5\n')
         f.write('nameserver 223.6.6.6\n')
-    group = distro_path + '/etc/group'
+    group = f'{distro_path}/etc/group'
     with os.popen('whoami') as p:
         userid = p.read()
         userid = userid[4 : len(userid) - 1]
-        gp1 = '20' + userid
-        gp2 = '50' + userid
     with open(group, 'a') as g:
-        g.write('''
+        g.write(f'''
 3003:x:3003:
 9997:x:9997:
-{0}:x:{0}:
-{1}:x:{1}:
-'''.format(gp1, gp2))
+20{userid}:x:20{userid}:
+50{userid}:x:50{userid}:
+''')
+    if distro in ('arch', 'kali') or 'debian' in distro:
+        with open(f'{distro_path}/etc/bash.bashrc', 'a') as rc:
+            rc.write('''
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+''')
     config = load_local()
     config.update({distro: infos})
     with open(XTILO_CONFIG, 'w') as f:
         json.dump(config, f, indent=4)
     script(distro)
     print('一切完成')
-    print('使用 %s run %s 来运行' % (FILE_NAME, distro))
+    print(f'使用 {FILE_NAME} run {distro} 来运行')
 
 
 def script(distro):
     distro_path = XTILO_HOME + distro
     infos = load_local().get(distro)
-    script = '{0}start-{1}.sh'.format(XTILO_HOME, distro)
+    script = f'{XTILO_HOME}start-{distro}.sh'
     with open(script, 'w') as s:
-        s.write("""#!/usr/bin/bash
-DISTRO_PATH={}
+        s.write(f"""#!/usr/bin/bash
+DISTRO_PATH={distro_path}
 unset LD_PRELOAD
 command='proot'
 command+=' --link2symlink'
@@ -446,44 +452,52 @@ command+=' --kill-on-exit'
 command+=' -S '
 command+=$DISTRO_PATH
 command+=' --cwd=/root'
+#command+=" -b $TMPDIR:/tmp"
 #command+=' -b /storage'
 #command+=' -b /sdcard'
 #command+=' -b /data/data/com.termux'
-if [ -d '/apex' ]; then
-    command+=' -b /apex'
-fi
-command+=' -b /system'
+#command+=' -b /vendor'
+#if [ -d '/apex' ]; then
+#    command+=' -b /apex'
+#fi
+#command+=' -b /system'
 command+=' -b /dev'
 command+=' -b /dev/urandom:/dev/random'
-command+=" -b ${{DISTRO_PATH}}/tmp:/dev/shm"
+command+=" -b $DISTRO_PATH/root:/dev/shm"
 command+=' -b /proc'
 command+=' -b /proc/self/fd:/dev/fd'
 command+=' -b /proc/self/fd/0:/dev/stdin'
 command+=' -b /proc/self/fd/1:/dev/stdout'
 command+=' -b /proc/self/fd/2:/dev/stderr'
 command+=' -b /sys'
-command+=" -b ${{DISTRO_PATH}}/proc/.loadavg:/proc/loadavg"
-command+=" -b ${{DISTRO_PATH}}/proc/.stat:/proc/stat"
-command+=" -b ${{DISTRO_PATH}}/proc/.uptime:/proc/uptime"
-command+=" -b ${{DISTRO_PATH}}/proc/.version:/proc/version"
-command+=" -b ${{DISTRO_PATH}}/proc/.vmstat:/proc/vmstat"
+command+=" -b $DISTRO_PATH/proc/.loadavg:/proc/loadavg"
+command+=" -b $DISTRO_PATH/proc/.stat:/proc/stat"
+command+=" -b $DISTRO_PATH/proc/.uptime:/proc/uptime"
+command+=" -b $DISTRO_PATH/proc/.version:/proc/version"
+command+=" -b $DISTRO_PATH/proc/.vmstat:/proc/vmstat"
 command+=' -w /root'
 command+=' /usr/bin/env -i'
 command+=' HOME=/root'
-command+=' LANG=zh_CN.UTF-8'
+command+=' LANG=C.UTF-8'
 command+=' PATH=/bin:/usr/bin:/sbin:/usr/sbin:/usr/local/bin:/usr/local/sbin'
 command+=' TERM=xterm-256color'
 command+=' TMPDIR=/tmp'
 command+=' /bin/'
-command+='""".format(distro_path))
+command+='""")
         if 'shell' in infos.keys():
             s.write(infos.get('shell'))
         else:
             s.write('bash')
         s.write("""'
 command+=' --login'
-$command""")
-        os.system('chmod +x %s' % script)
+com="$@"
+if [ -e $1 ]; then
+    exec $command
+else
+    $command -e "$com"
+fi
+""")
+        os.system(f'chmod +x {script}')
         print('启动脚本已生成')
 
 
@@ -491,9 +505,9 @@ def extract_file(distro, zip_m):
     distro_path = XTILO_HOME + distro
     file_path = XTILO_TMP + distro
     if os.path.isdir(distro_path):
-        os.system('chmod -R 777 %s' % distro_path)
-        os.system('rm -rf %s' % distro_path)
-    zip_f = tarfile.open(file_path, 'r:' + zip_m)
+        os.system(f'chmod -R 777 {distro_path}')
+        os.system(f'rm -rf {distro_path}')
+    zip_f = tarfile.open(file_path, f'r:{zip_m}')
     if not os.path.isdir(distro_path):
         os.mkdir(distro_path)
     print('解压镜像中')
@@ -501,8 +515,8 @@ def extract_file(distro, zip_m):
 
 
 def extract_fedora():
-    file_path = XTILO_TMP + 'fedora'
-    distro_path = XTILO_HOME + 'fedora'
+    file_path = f'{XTILO_TMP}fedora'
+    distro_path = f'{XTILO_HOME}fedora'
     print('解压镜像中')
     zip_f = tarfile.open(file_path)
     for i in zip_f.getnames():
@@ -521,8 +535,8 @@ def check_sum(distro, url, check):
     r = requests.get(url)
     file_path = XTILO_TMP + distro
     if not r.status_code == 200:
-        a = input('无法获取文件校验码，是否继续 [Y/n] ')
-        if a not in ('y', 'Y'):
+        a = input('无法获取文件校验码，是否继续 [Y/*] ')
+        if a not in ('Y', 'y'):
             print('正在退出')
             os.remove(file_path)
             sys.exit(1)
@@ -533,7 +547,7 @@ def check_sum(distro, url, check):
     block_size = io.DEFAULT_BUFFER_SIZE
     t = tqdm(total=total_size, unit='iB', unit_scale=True)
     with open(file_path, 'rb') as f:
-        for chunk in iter(lambda: f.read(block_size ), b''):
+        for chunk in iter(lambda: f.read(block_size), b''):
             t.update(len(chunk))
             sum_calc.update(chunk)
     t.close()
@@ -552,8 +566,8 @@ def check_sum_ubuntu(distro, url):
     r = requests.get(url)
     file_path = XTILO_TMP + distro
     if not r.status_code == 200:
-        a = input('无法获取文件校验码，是否继续 [Y/n] ')
-        if a not in ('y','Y'):
+        a = input('无法获取文件校验码，是否继续 [Y/*] ')
+        if a not in ('Y','y'):
             print('正在退出')
             os.remove(file_path)
             sys.exit(1)
@@ -578,13 +592,13 @@ def check_sum_ubuntu(distro, url):
 
 def clean_tmps():
     print('正在清除缓存')
-    os.system('rm -rf {}*'.format(XTILO_TMP))
+    os.system(f'rm -rf {XTILO_TMP}*')
 
 
-def run_image(distro):
+def run_image(distro, com):
     config = load_local()
     if distro not in config.keys():
-        print('未在本地找到 %s 镜像' % distro)
+        print(f'未在本地找到 {distro} 镜像')
         sys.exit(1)
     distro_path = XTILO_HOME + distro
     infos = config.get(distro)
@@ -594,31 +608,32 @@ def run_image(distro):
     command.append(' -S ')
     command.append(distro_path)
     command.append(' --cwd=/root')
+    #command.append(f' -b {distro_path}:/tmp')
     #command.append(' -b /storage')
     #command.append(' -b /sdcard')
     #command.append(' -b /data/data/com.termux')
-    command.append(' -b /vendor')
-    if os.path.isdir('/apex'):
-        command.append(' -b /apex')
-    command.append(' -b /system')
+    #command.append(' -b /vendor')
+    #if os.path.isdir('/apex'):
+        #command.append(' -b /apex')
+    #command.append(' -b /system')
     command.append(' -b /dev')
     command.append(' -b /dev/urandom:/dev/random')
-    command.append(' -b {}/tmp:/dev/shm'.format(distro_path))
+    command.append(f' -b {distro_path}/root:/dev/shm')
     command.append(' -b /proc')
     command.append(' -b /proc/self/fd:/dev/fd')
     command.append(' -b /proc/self/fd/0:/dev/stdin')
     command.append(' -b /proc/self/fd/1:/dev/stdout')
     command.append(' -b /proc/self/fd/2:/dev/stderr')
     command.append(' -b /sys')
-    command.append(' -b {}/proc/.loadavg:/proc/loadavg'.format(distro_path))
-    command.append(' -b {}/proc/.stat:/proc/stat'.format(distro_path))
-    command.append(' -b {}/proc/.uptime:/proc/uptime'.format(distro_path))
-    command.append(' -b {}/proc/.version:/proc/version'.format(distro_path))
-    command.append(' -b {}/proc/.vmstat:/proc/vmstat'.format(distro_path))
+    command.append(f' -b {distro_path}/proc/.loadavg:/proc/loadavg')
+    command.append(f' -b {distro_path}/proc/.stat:/proc/stat')
+    command.append(f' -b {distro_path}/proc/.uptime:/proc/uptime')
+    command.append(f' -b {distro_path}/proc/.version:/proc/version')
+    command.append(f' -b {distro_path}/proc/.vmstat:/proc/vmstat')
     command.append(' -w /root')
     command.append(' /usr/bin/env -i')
     command.append(' HOME=/root')
-    command.append(' LANG=zh_CN.UTF-8')
+    command.append(' LANG=C.UTF-8')
     command.append(' PATH=/bin:/usr/bin:/sbin:/usr/sbin:/usr/local/bin:/usr/local/sbin')
     command.append(' TERM=xterm-256color')
     command.append(' TMPDIR=/tmp')
@@ -629,14 +644,17 @@ def run_image(distro):
     else:
         command.append('bash')
     command.append(' --login')
-    os.system(''.join(command))
+    if com:
+        os.system(f"""{''.join(command)} -c '{' '.join(com)}'""")
+    else:
+        os.system(f"exec {''.join(command)}")
 
 
 def show_help():
     print('Xtilo\t\t', XTILO_VERSION)
-    print('Usage: %s [命令] [参数]\n' % FILE_NAME)
+    print(f'Usage: {FILE_NAME} [命令] [参数]\n')
     print('Xtilo 是一个用来帮助你在 Termux 上安装不同的 GNU/Linux 发行版的程序')
-    print('它由 Xihi 修改自 Atilo\n')
+    print('修改自 Atilo\n')
     print('命令：')
     print('images\t\t 列出可用镜像')
     print('set\t\t 设置镜像列表链接')
@@ -653,7 +671,7 @@ if __name__ == '__main__':
         show_help()
         print('请指定一个命令')
         sys.exit(1)
-    if len(sys.argv) > 3:
+    if len(sys.argv) > 3 and sys.argv[1] != 'run':
         print('无用参数')
         sys.exit(1)
     if sys.argv[1] == 'help':
@@ -682,7 +700,7 @@ if __name__ == '__main__':
             print('你需要从镜像列表中指定可用镜像')
             sys.exit(1)
         else:
-            run_image(sys.argv[2])
+            run_image(sys.argv[2], sys.argv[3:] if len(sys.argv) > 3 else None)
     elif sys.argv[1] == 'clean':
         clean_tmps()
     else:

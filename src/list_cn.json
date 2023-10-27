@@ -1,35 +1,48 @@
 {
     "linux": [
         "alpine",
+        "arch",
         "centos",
         "centos8",
         "centos9",
         "debian",
+        "debian12",
+        "debiansid",
         "fedora",
         "kali",
-        "opensuse",
-        "ubuntu"
+        "suse",
+        "susetbwd",
+        "ubuntu",
+        "ubuntu2304",
+        "void"
     ],
-    "update": "2023-05-13",
+    "update": "2023-10-27",
     "alpine": {
         "name": "Alpine Linux",
-        "version": "3.18.0_rc6",
+        "version": "3.18.4",
         "shell": "ash",
-        "aarch64": "https://mirrors.bfsu.edu.cn/alpine/latest-stable/releases/aarch64/alpine-minirootfs-3.18.0_rc6-aarch64.tar.gz",
-        "armhf": "https://mirrors.bfsu.edu.cn/alpine/latest-stable/releases/armhf/alpine-minirootfs-3.18.0_rc6-armhf.tar.gz",
-        "amd64": "https://mirrors.bfsu.edu.cn/alpine/latest-stable/releases/x86_64/alpine-minirootfs-3.18.0_rc6-x86_64.tar.gz",
-        "i386": "https://mirrors.bfsu.edu.cn/alpine/latest-stable/releases/x86/alpine-minirootfs-3.18.0_rc6-x86.tar.gz",
+        "aarch64": "https://mirrors.tuna.tsinghua.edu.cn/alpine/latest-stable/releases/aarch64/alpine-minirootfs-3.18.4-aarch64.tar.gz",
+        "armhf": "https://mirrors.tuna.tsinghua.edu.cn/alpine/latest-stable/releases/armhf/alpine-minirootfs-3.18.4-armhf.tar.gz",
+        "amd64": "https://mirrors.tuna.tsinghua.edu.cn/alpine/latest-stable/releases/x86_64/alpine-minirootfs-3.18.4-x86_64.tar.gz",
+        "i386": "https://mirrors.tuna.tsinghua.edu.cn/alpine/latest-stable/releases/x86/alpine-minirootfs-3.18.4-x86.tar.gz",
         "check": "sha256",
         "zip": "gz"
+    },
+    "arch": {
+        "name": "Arch Linux",
+        "lxc": true,
+        "version": "latest",
+        "aarch64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/archlinux/current/arm64/default/",
+        "amd64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/archlinux/current/amd64/default/",
+        "check": "lxc",
+        "zip": "xz"
     },
     "centos": {
         "name": "CentOS Linux",
         "version": "7",
         "lxc": true,
         "aarch64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/centos/7/arm64/default/",
-        "armhf": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/centos/7/armhf/default/",
         "amd64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/centos/7/amd64/default/",
-        "i386": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/centos/7/i386/default/",
         "check": "lxc",
         "zip": "xz"
     },
@@ -53,31 +66,45 @@
     },
     "debian": {
         "name": "Debian",
-        "version": "bullseye",
+        "version": "bullseye(11)",
         "lxc": true,
         "aarch64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/debian/bullseye/arm64/default/",
-        "armhf": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/debian/bullseye/armhf/default/",
         "amd64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/debian/bullseye/amd64/default/",
-        "i386": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/debian/bullseye/i386/default/",
+        "check": "lxc",
+        "zip": "xz"
+    },
+    "debian12": {
+        "name": "Debian",
+        "version": "bookworm(12)",
+        "lxc": true,
+        "aarch64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/debian/bookworm/arm64/default/",
+        "amd64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/debian/bookworm/amd64/default/",
+        "check": "lxc",
+        "zip": "xz"
+    },
+    "debiansid": {
+        "name": "Debian",
+        "version": "sid",
+        "lxc": true,
+        "aarch64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/debian/sid/arm64/default/",
+        "amd64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/debian/sid/amd64/default/",
         "check": "lxc",
         "zip": "xz"
     },
     "devuan": {
         "name": "Devuan",
-        "version": "chimaera",
+        "version": "daedalus(5)",
         "lxc": true,
-        "aarch64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/devuan/chimaera/arm64/default/",
-        "armhf": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/devuan/chimaera/armhf/default/",
-        "amd64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/devuan/chimaera/amd64/default/",
-        "i386": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/devuan/chimaera/i386/default/",
+        "aarch64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/devuan/daedalus/arm64/default/",
+        "amd64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/devuan/daedalus/amd64/default/",
         "check": "lxc",
         "zip": "xz"
     },
     "fedora": {
         "name": "Fedora Linux",
         "version": "38",
-        "aarch64": "https://mirrors.bfsu.edu.cn/fedora/releases/38/Container/aarch64/images/Fedora-Container-Base-38-1.6.aarch64.tar.xz",
-        "amd64": "https://mirrors.bfsu.edu.cn/fedora/releases/38/Container/x86_64/images/Fedora-Container-Base-38-1.6.x86_64.tar.xz",
+        "aarch64": "https://mirrors.tuna.tsinghua.edu.cn/fedora/releases/38/Container/aarch64/images/Fedora-Container-Base-38-1.6.aarch64.tar.xz",
+        "amd64": "https://mirrors.tuna.tsinghua.edu.cn/fedora/releases/38/Container/x86_64/images/Fedora-Container-Base-38-1.6.x86_64.tar.xz",
         "check": "no",
         "zip": "fedora"
     },
@@ -86,14 +113,22 @@
         "version": "latest",
         "lxc": true,
         "aarch64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/kali/current/arm64/default/",
-        "armhf": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/kali/current/armhf/default/",
         "amd64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/kali/current/amd64/default/",
         "check": "lxc",
         "zip": "xz"
     },
-    "opensuse": {
-        "name": "openSUSE",
-        "version": "Tumbleweed",
+    "suse": {
+        "name": "openSUSE Leap",
+        "version": "15.5",
+        "lxc": true,
+        "aarch64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/opensuse/15.5/arm64/default/",
+        "amd64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/opensuse/15.5/amd64/default/",
+        "check": "lxc",
+        "zip": "xz"
+    },
+    "susetbwd": {
+        "name": "openSUSE Tumbleweed",
+        "version": "latest",
         "lxc": true,
         "aarch64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/opensuse/tumbleweed/arm64/default/",
         "amd64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/opensuse/tumbleweed/amd64/default/",
@@ -102,11 +137,28 @@
     },
     "ubuntu": {
         "name": "Ubuntu",
-        "version": "jammy",
+        "version": "jammy(22.10)",
         "lxc": true,
         "aarch64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/ubuntu/jammy/arm64/default/",
-        "armhf": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/ubuntu/jammy/armhf/default/",
         "amd64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/ubuntu/jammy/amd64/default/",
+        "check": "lxc",
+        "zip": "xz"
+    },
+    "ubuntu2304": {
+        "name": "Ubuntu",
+        "version": "lunar(23.04)",
+        "lxc": true,
+        "aarch64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/ubuntu/lunar/arm64/default/",
+        "amd64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/ubuntu/lunar/amd64/default/",
+        "check": "lxc",
+        "zip": "xz"
+    },
+    "void": {
+        "name": "Void Linux",
+        "version": "latest",
+        "lxc": true,
+        "aarch64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/voidlinux/current/arm64/default/",
+        "amd64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/voidlinux/current/amd64/default/",
         "check": "lxc",
         "zip": "xz"
     }
