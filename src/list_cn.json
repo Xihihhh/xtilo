@@ -16,7 +16,7 @@
         "ubuntu2304",
         "void"
     ],
-    "update": "2023-10-27",
+    "update": "2024-03-06",
     "alpine": {
         "name": "Alpine Linux",
         "version": "3.18.4",
@@ -102,9 +102,9 @@
     },
     "fedora": {
         "name": "Fedora Linux",
-        "version": "38",
-        "aarch64": "https://mirrors.tuna.tsinghua.edu.cn/fedora/releases/38/Container/aarch64/images/Fedora-Container-Base-38-1.6.aarch64.tar.xz",
-        "amd64": "https://mirrors.tuna.tsinghua.edu.cn/fedora/releases/38/Container/x86_64/images/Fedora-Container-Base-38-1.6.x86_64.tar.xz",
+        "version": "39",
+        "aarch64": "https://mirrors.tuna.tsinghua.edu.cn/fedora/releases/39/Container/aarch64/images/Fedora-Container-Base-39-1.5.aarch64.tar.xz",
+        "amd64": "https://mirrors.tuna.tsinghua.edu.cn/fedora/releases/39/Container/x86_64/images/Fedora-Container-Base-39-1.5.aarch64.tar.xz",
         "check": "no",
         "zip": "fedora"
     },
@@ -137,10 +137,10 @@
     },
     "ubuntu": {
         "name": "Ubuntu",
-        "version": "jammy(22.10)",
+        "version": "noble(24.04)",
         "lxc": true,
-        "aarch64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/ubuntu/jammy/arm64/default/",
-        "amd64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/ubuntu/jammy/amd64/default/",
+        "aarch64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/ubuntu/noble/arm64/default/",
+        "amd64": "https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/ubuntu/noble/amd64/default/",
         "check": "lxc",
         "zip": "xz"
     },
